@@ -1,0 +1,69 @@
+package co.edu.poli.actividad3.modelo;
+
+public class Accesorio {
+	private String idAccesorio;
+	private String nombre;
+	private String material;
+	private String fechaFabricacion;
+
+// Constructor completo
+	public Accesorio(String idAccesorio, String nombre, String material, String fechaFabricacion) {
+		this.idAccesorio = idAccesorio;
+		this.nombre = nombre;
+		this.material = material;
+		this.fechaFabricacion = fechaFabricacion;
+	}
+
+// Constructores sobrecargados
+	public Accesorio(String idAccesorio, String nombre, String material) {
+		this(idAccesorio, nombre, material, "Desconocida");
+	}
+
+	public Accesorio(String idAccesorio, String nombre) {
+		this(idAccesorio, nombre, "Desconocido", "Desconocida");
+	}
+
+// Getters y setters
+	public String getIdAccesorio() {
+		return idAccesorio;
+	}
+
+	public void setIdAccesorio(String idAccesorio) {
+		this.idAccesorio = idAccesorio;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public String getMaterial() {
+		return material;
+	}
+
+	public void setMaterial(String material) {
+		this.material = material;
+	}
+
+	public String getFechaFabricacion() {
+		return fechaFabricacion;
+	}
+
+	public void setFechaFabricacion(String fechaFabricacion) {
+		this.fechaFabricacion = fechaFabricacion;
+	}
+
+// MÃ©todo adicional
+	public double determinarCadena(double tamPinion) {
+		return tamPinion * 2.5;
+	}
+
+	@Override
+	public String toString() {
+		return "ACCESORIO: " + "|(id= " + idAccesorio + ")|" + " (nombre= " + nombre + ")|" + " (materia= " + material
+				+ ")|" + " (fechaFabricacion= " + fechaFabricacion + ")|";
+	}
+}
