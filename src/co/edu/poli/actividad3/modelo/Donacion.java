@@ -14,6 +14,7 @@ public class Donacion {
 		this.cantidad = cantidad;
 		this.tipoDonacion = tipoDonacion;
 	}
+	w
 
 	public Donacion(String serial, String donador) {
 		this(serial, "Sin fecha", donador, "0", "Desconocido");
