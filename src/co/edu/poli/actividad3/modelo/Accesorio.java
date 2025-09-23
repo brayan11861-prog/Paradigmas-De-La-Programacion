@@ -1,18 +1,10 @@
 package co.edu.poli.actividad3.modelo;
-
-
-
-
-
-
-
 public class Accesorio {
 
     private String idAccesorio;
     private String nombre;
     private String material;
     private String fechaFabricacion;
-
 
     public Accesorio(String idAccesorio, String nombre, String material, String fechaFabricacion) {
         this.idAccesorio = idAccesorio;
