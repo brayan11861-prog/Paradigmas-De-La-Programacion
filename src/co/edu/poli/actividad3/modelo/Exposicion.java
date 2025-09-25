@@ -1,9 +1,13 @@
 package co.edu.poli.actividad3.modelo;
 
+/**
+ * Clase que representa una exposición como subclase de Actividad.
+ */
 public class Exposicion extends Actividad {
 	private String descripcion;
 	private String tema;
 	private Visita visita;
+	private Ubicacion ubicacion; // 🔄 agregado
 
 	public Exposicion(String serial, String nombre, String fechainicio, String fechafin, String descripcion,
 			String tema) {
