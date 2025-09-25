@@ -1,5 +1,5 @@
 package co.edu.poli.actividad3.modelo;
-public class Actividad {
+public abstract class Actividad {
 	private String serial;
 	private String nombre;
 	private String fechainicio;
