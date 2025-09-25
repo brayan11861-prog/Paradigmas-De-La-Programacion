@@ -1,11 +1,11 @@
 package co.edu.poli.actividad3.modelo;
 
 /**
- * Clase que representa un evento como subclase de Actividad.
-package co.edu.poli.actividad3.modelo;
-
-/**
- * Clase que representa un evento como subclase de Actividad.
+ * Clase que representa un evento como subclase de Actividad. Contiene tipo de
+ * evento y permite organizarlo.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
  */
 public class Evento extends Actividad {
 	private String tipoEvento;
@@ -28,6 +28,9 @@ public class Evento extends Actividad {
 		this.tipoEvento = tipoEvento;
 	}
 
+	/**
+	 * Muestra la organización del evento en consola.
+	 */
 	public void organizarEvento() {
 		System.out.println("El evento " + getNombre() + " se esta organizando.");
 	}
