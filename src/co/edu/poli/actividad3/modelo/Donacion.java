@@ -1,5 +1,12 @@
 package co.edu.poli.actividad3.modelo;
 
+/**
+ * Clase que representa una donación. Contiene serial, fecha, donador, cantidad
+ * y tipo de donación. Permite registrar la donación.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
+ */
 public class Donacion {
 	private String serial;
 	private String fecha;
@@ -14,7 +21,6 @@ public class Donacion {
 		this.cantidad = cantidad;
 		this.tipoDonacion = tipoDonacion;
 	}
-	
 
 	public Donacion(String serial, String donador) {
 		this(serial, "Sin fecha", donador, "0", "Desconocido");
@@ -60,6 +66,9 @@ public class Donacion {
 		this.tipoDonacion = tipoDonacion;
 	}
 
+	/**
+	 * Muestra el registro de la donación en consola.
+	 */
 	public void registrarDonacion() {
 		System.out.println("Donacion de " + cantidad + " realizada por " + donador);
 	}
