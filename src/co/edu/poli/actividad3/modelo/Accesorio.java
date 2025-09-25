@@ -1,7 +1,11 @@
 package co.edu.poli.actividad3.modelo;
 
 /**
- * Clase que representa un accesorio de una obra.
+ * Clase que representa un accesorio de una obra. Permite manejar atributos
+ * básicos y calcular la cadena de tamaño.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
  */
 public class Accesorio {
 
@@ -57,6 +61,12 @@ public class Accesorio {
 		this.fechaFabricacion = fechaFabricacion;
 	}
 
+	/**
+	 * Calcula la longitud de la cadena de un accesorio según el tamaño del piñón.
+	 * 
+	 * @param tamPinion tamaño del piñón
+	 * @return longitud de la cadena
+	 */
 	public double determinarCadena(double tamPinion) {
 		return tamPinion * 2.5;
 	}
