@@ -1,17 +1,22 @@
 package co.edu.poli.actividad3.modelo;
 
-import co.edu.poli.actividad3.modelo.Obra;
-
+/**
+ * Clase que representa un director de obras. Contiene información sobre
+ * historicidad, originalidad, valor, manipulabilidad y obra asociada. Puede
+ * supervisar la obra.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
+ */
 public class Director {
 	private String serial;
 	private boolean esHistorico;
 	private boolean esOriginal;
 	private String valor;
 	private String esManipulabre;
-	private Obra obra; // relaciÃ³n con Obra
-	private Director director; // relaciÃ³n recursiva (un director puede estar asociado a otro)
+	private Obra obra;
+	private Director director;
 
-// Constructor completo
 	public Director(String serial, boolean esHistorico, boolean esOriginal, String valor, String esManipulabre,
 			Obra obra) {
 		this.serial = serial;
@@ -83,6 +88,9 @@ public class Director {
 		this.director = director;
 	}
 
+	/**
+	 * Muestra la supervisión del director sobre su obra.
+	 */
 	public void supervisar() {
 		if (obra != null) {
 			System.out.println("El director supervisa la obra: " + obra.getTitulo());
