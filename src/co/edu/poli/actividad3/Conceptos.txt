@@ -1,4 +1,5 @@
  
-Link Githup :  https://github.com/brayan11861-prog/Paradigmas-De-La-Programacion/edit/nueva-rama/src/co/edu/poli/actividad3/Conceptos.txt
+Link Githup :  https://github.com/brayan11861-prog/Paradigmas-De-La-Programacion
+
 
 
