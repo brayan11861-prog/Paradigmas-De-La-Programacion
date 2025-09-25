@@ -1,7 +1,12 @@
 package co.edu.poli.actividad3.modelo;
 
 /**
- * Clase que representa la ubicación de una actividad.
+ * Clase que representa la ubicación de una actividad o visita. Contiene
+ * dirección, sala y ciudad. Permite obtener información completa de la
+ * ubicación.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
  */
 public class Ubicacion {
 	private String direccion;
