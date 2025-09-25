@@ -1,12 +1,16 @@
 package co.edu.poli.actividad3.modelo;
 
 /**
- * Clase que representa una visita como subclase de Actividad.
+ * Clase que representa una visita como subclase de Actividad. Contiene género,
+ * fecha de visita y ubicación. Permite registrar la visita.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
  */
 public class Visita extends Actividad {
 	private String genero;
 	private String fechaVisita;
-	private Ubicacion ubicacion; // 🔄 agregado
+	private Ubicacion ubicacion;
 
 	public Visita(String serial, String nombre, String fechainicio, String fechafin, String genero,
 			String fechaVisita) {
@@ -37,6 +41,9 @@ public class Visita extends Actividad {
 		this.fechaVisita = fechaVisita;
 	}
 
+	/**
+	 * Muestra el registro de la visita en consola.
+	 */
 	public void registrarVisita() {
 		System.out.println("La " + getNombre() + " se registro el " + fechaVisita);
 	}
