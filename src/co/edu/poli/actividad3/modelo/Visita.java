@@ -1,8 +1,12 @@
 package co.edu.poli.actividad3.modelo;
 
+/**
+ * Clase que representa una visita como subclase de Actividad.
+ */
 public class Visita extends Actividad {
 	private String genero;
 	private String fechaVisita;
+	private Ubicacion ubicacion; // 🔄 agregado
 
 	public Visita(String serial, String nombre, String fechainicio, String fechafin, String genero,
 			String fechaVisita) {
@@ -39,7 +43,6 @@ public class Visita extends Actividad {
 
 	@Override
 	public String toString() {
-		return "VISITA: |" + super.toString() + " (gÃ©nero='" + genero + "')|" + " (fechaVisita='" + fechaVisita
-				+ "')|";
+		return "VISITA: |" + super.toString() + " (género='" + genero + "')|" + " (fechaVisita='" + fechaVisita + "')|";
 	}
 }
