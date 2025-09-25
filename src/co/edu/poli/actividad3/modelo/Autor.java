@@ -1,23 +1,27 @@
 package co.edu.poli.actividad3.modelo;
 
+/**
+ * Clase que representa un autor de obras. Permite crear obras y almacenar
+ * información del autor. Contiene id, nombre y nacionalidad.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
+ */
 public class Autor {
 	private String idAutor;
 	private String nombre;
 	private String nacionalidad;
 
-// Constructor completo
 	public Autor(String idAutor, String nombre, String nacionalidad) {
 		this.idAutor = idAutor;
 		this.nombre = nombre;
 		this.nacionalidad = nacionalidad;
 	}
 
-// Constructor sobrecargado
 	public Autor(String idAutor, String nombre) {
 		this(idAutor, nombre, "Desconocida");
 	}
 
-// Getters y setters
 	public String getIdAutor() {
 		return idAutor;
 	}
@@ -42,7 +46,9 @@ public class Autor {
 		this.nacionalidad = nacionalidad;
 	}
 
-// MÃ©todo adicional
+	/**
+	 * Simula la creación de una obra por parte del autor.
+	 */
 	public void crearObra() {
 		System.out.println("_________________________________________________________");
 		System.out.println("El autor " + nombre + " esta creando una obra.");
