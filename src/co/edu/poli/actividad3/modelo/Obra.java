@@ -1,5 +1,12 @@
 package co.edu.poli.actividad3.modelo;
 
+/**
+ * Clase que representa una obra de arte. Contiene id, título, técnica y fecha
+ * de creación. Permite exponer la obra.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
+ */
 public class Obra {
 	private String idObra;
 	private String titulo;
@@ -49,8 +56,10 @@ public class Obra {
 		this.fechaCreacion = fechaCreacion;
 	}
 
+	/**
+	 * Muestra por consola que la obra está siendo expuesta.
+	 */
 	public void exponerObra() {
-
 		System.out.println("La obra " + titulo + " esta siendo expuesta.");
 	}
 
@@ -59,5 +68,4 @@ public class Obra {
 		return "OBRA: " + "|(Seria=" + idObra + ')' + ", (titulo='" + titulo + ")|" + ", tecnica='" + tecnica + ")|"
 				+ ", fechaCreacion='" + fechaCreacion + ")|";
 	}
-
 }
