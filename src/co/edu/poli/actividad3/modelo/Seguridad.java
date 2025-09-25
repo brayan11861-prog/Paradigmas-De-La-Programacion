@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 /**
- * Clase para gestionar usuarios, roles y permisos.
+ * Clase para gestionar usuarios, roles y permisos del sistema. Permite
+ * registrar, autenticar, cerrar sesión y asignar permisos.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
  */
 public class Seguridad {
 	private HashMap<String, String> usuarios;
@@ -64,3 +68,4 @@ public class Seguridad {
 		return "SEGURIDAD: (usuarioActual='" + usuarioActual + "')";
 	}
 }
+
