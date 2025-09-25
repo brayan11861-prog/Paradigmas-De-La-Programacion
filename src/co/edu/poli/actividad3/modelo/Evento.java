@@ -1,5 +1,12 @@
 package co.edu.poli.actividad3.modelo;
 
+/**
+ * Clase que representa un evento como subclase de Actividad.
+package co.edu.poli.actividad3.modelo;
+
+/**
+ * Clase que representa un evento como subclase de Actividad.
+ */
 public class Evento extends Actividad {
 	private String tipoEvento;
 
