@@ -1,13 +1,17 @@
 package co.edu.poli.actividad3.modelo;
 
 /**
- * Clase que representa una exposición como subclase de Actividad.
+ * Clase que representa una exposición como subclase de Actividad. Contiene
+ * descripción, tema, visita y ubicación. Permite inaugurar la exposición.
+ * 
+ * @author Brayan Niño
+ * @version 1.0
  */
 public class Exposicion extends Actividad {
 	private String descripcion;
 	private String tema;
 	private Visita visita;
-	private Ubicacion ubicacion; // 🔄 agregado
+	private Ubicacion ubicacion;
 
 	public Exposicion(String serial, String nombre, String fechainicio, String fechafin, String descripcion,
 			String tema) {
@@ -38,6 +42,9 @@ public class Exposicion extends Actividad {
 		this.tema = tema;
 	}
 
+	/**
+	 * Muestra por consola la inauguración de la exposición.
+	 */
 	public void inaugurar() {
 		System.out.println("La exposicion " + getNombre() + " ha sido inaugurada.");
 	}
