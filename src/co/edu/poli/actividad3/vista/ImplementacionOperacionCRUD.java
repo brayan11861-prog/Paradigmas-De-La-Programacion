@@ -1,71 +1,94 @@
 package co.edu.poli.actividad3.servicios;
 
-import co.edu.poli.actividad3.modelo.Actividad;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Implementación de la interfaz OperacionCRUD que usa un arreglo dinámico
- * para gestionar las actividades.
+ * Implementación genérica de operaciones CRUD usando arreglos dinámicos.
+ * 
+ * @param <T> Tipo de objeto a gestionar
+ * @author Brayan Niño
+ * @version 1.0
  */
-public class ImplementacionOperacionCRUD implements OperacionCRUD {
+public class ImplementacionOperacionCRUD<T> implements OperacionCRUD<T> {
 
-    private Actividad[] actividades;
-    private int size;
+	private List<T> lista;
 
-    public ImplementacionOperacionCRUD() {
-        this.actividades = new Actividad[5]; // tamaño inicial
-        this.size = 0;
-    }
+	/**
+	 * Constructor que inicializa la lista interna.
+	 */
+	public ImplementacionOperacionCRUD() {
+		lista = new ArrayList<>();
+	}
 
-    @Override
-    public boolean create(Actividad actividad) {
-        if (size == actividades.length) {
-            // ampliar el arreglo si está lleno
-            Actividad[] nuevo = new Actividad[actividades.length * 2];
-            System.arraycopy(actividades, 0, nuevo, 0, actividades.length);
-            actividades = nuevo;
-        }
-        actividades[size++] = actividad;
-        return true;
-    }
+	/**
+	 * Inserta un objeto en la lista.
+	 */
+	@Override
+	public void create(T objeto) {
+		lista.add(objeto);
+	}
 
-    @Override
-    public Actividad read(String serial) {
-        for (int i = 0; i < size; i++) {
-            if (actividades[i].getSerial().equals(serial)) {
-                return actividades[i];
-            }
-        }
-        return null;
-    }
+	/**
+	 * Busca un objeto por ID usando reflexión.
+	 */
+	@Override
+	public T read(String id) {
+		try {
+			for (T obj : lista) {
+				String objId = obj.getClass().getMethod("getIdAccesorio").invoke(obj).toString();
+				if (objId.equals(id))
+					return obj;
+			}
+		} catch (Exception e) {
+			/* Ignorar errores de reflexión */ }
+		return null;
+	}
 
-    @Override
-    public boolean update(String serial, Actividad nuevaActividad) {
-        for (int i = 0; i < size; i++) {
-            if (actividades[i].getSerial().equals(serial)) {
-                actividades[i] = nuevaActividad;
-                return true;
-            }
-        }
-        return false;
-    }
+	/**
+	 * Actualiza un objeto por ID usando reflexión.
+	 */
+	@Override
+	public boolean update(String id, T objeto) {
+		try {
+			for (int i = 0; i < lista.size(); i++) {
+				T obj = lista.get(i);
+				String objId = obj.getClass().getMethod("getIdAccesorio").invoke(obj).toString();
+				if (objId.equals(id)) {
+					lista.set(i, objeto);
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			/* Ignorar errores */ }
+		return false;
+	}
 
-    @Override
-    public boolean delete(String serial) {
-        for (int i = 0; i < size; i++) {
-            if (actividades[i].getSerial().equals(serial)) {
-                actividades[i] = actividades[size - 1]; // mover última
-                actividades[size - 1] = null;
-                size--;
-                return true;
-            }
-        }
-        return false;
-    }
+	/**
+	 * Elimina un objeto por ID usando reflexión.
+	 */
+	@Override
+	public boolean delete(String id) {
+		try {
+			for (int i = 0; i < lista.size(); i++) {
+				T obj = lista.get(i);
+				String objId = obj.getClass().getMethod("getIdAccesorio").invoke(obj).toString();
+				if (objId.equals(id)) {
+					lista.remove(i);
+					return true;
+				}
+			}
+		} catch (Exception e) {
+			/* Ignorar errores */ }
+		return false;
+	}
 
-    @Override
-    public void listar() {
-        for (int i = 0; i < size; i++) {
-            System.out.println(actividades[i]);
-        }
-    }
+	/**
+	 * Retorna todos los objetos almacenados.
+	 */
+	@Override
+	public List<T> list() {
+		return lista;
+	}
 }
+
