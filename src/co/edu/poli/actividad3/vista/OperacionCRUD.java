@@ -1,19 +1,53 @@
 package co.edu.poli.actividad3.servicios;
 
-import co.edu.poli.actividad3.modelo.Actividad;
+import java.util.List;
 
 /**
- * Interfaz que define las operaciones CRUD para la clase Actividad.
+ * Interfaz que define operaciones CRUD genéricas.
+ * 
+ * @param <T> Tipo de objeto a gestionar
+ * @author Brayan Niño
+ * @version 1.0
  */
-public interface OperacionCRUD {
-    
-    boolean create(Actividad actividad);
+public interface OperacionCRUD<T> {
 
-    Actividad read(String serial);
+	/**
+	 * Inserta un objeto en el primer espacio disponible del arreglo.
+	 * 
+	 * @param objeto Objeto a insertar
+	 */
+	void create(T objeto);
 
-    boolean update(String serial, Actividad nuevaActividad);
+	/**
+	 * Busca un objeto por su ID.
+	 * 
+	 * @param id Identificador del objeto
+	 * @return Objeto encontrado, o null si no existe
+	 */
+	T read(String id);
 
-    boolean delete(String serial);
+	/**
+	 * Actualiza un objeto existente por su ID.
+	 * 
+	 * @param id     Identificador del objeto
+	 * @param objeto Nuevo objeto a reemplazar
+	 * @return true si se actualizó correctamente, false si no se encontró
+	 */
+	boolean update(String id, T objeto);
 
-    void listar();
+	/**
+	 * Elimina un objeto por su ID.
+	 * 
+	 * @param id Identificador del objeto
+	 * @return true si se eliminó correctamente, false si no se encontró
+	 */
+	boolean delete(String id);
+
+	/**
+	 * Lista todos los objetos actuales.
+	 * 
+	 * @return Lista de objetos
+	 */
+	List<T> list();
 }
+
