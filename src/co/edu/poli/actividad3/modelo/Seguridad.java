@@ -1,4 +1,4 @@
-package co.edu.poli.actividad3.vista;
+package co.edu.poli.actividad3.modelo;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -68,4 +68,5 @@ public class Seguridad {
 		return "SEGURIDAD: (usuarioActual='" + usuarioActual + "')";
 	}
 }
+
 
