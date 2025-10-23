@@ -1,131 +1,387 @@
 package co.edu.poli.actividad3.vista;
 
+import java.util.ArrayList;
+import java.util.Scanner;
 import co.edu.poli.actividad3.modelo.*;
-import co.edu.poli.actividad3.servicios.ImplementacionOperacionCRUD;
-import java.util.List;
 
-public final class Cliente {
-	public static void main(String[] args) {
-		System.out.println("_____________________________________________________________________________________");
-		System.out.println("------ [ REGISTRO DE OBJETOS CREADOS ] ------");
+public class Cliente {
 
-		// Crear objetos
-		final Accesorio a1 = new Accesorio("ACC001", "Marco", "Madera", "2022-01-01");
-		Autor au1 = new Autor("AUT001", "Wilson Eduardo", "Colombiano");
-		Obra o1 = new Obra("OBR001", "La Gioconda ");
-		Evento e1 = new Evento("EV001", "Subasta de Arte", "2025-09-15", "2025-09-16", "Subasta");
-		Exposicion ex1 = new Exposicion("EX001", "Arte Moderno", "2025-09-01", "2025-09-30", "Internacional", "Arte");
-		Visita v1 = new Visita("V001", "Visita Escolar", "2025-09-11", "2025-09-11", "Mixto", "2025-09-11");
-		Calificacion c1 = new Calificacion("C001", 'A', "Guernica", "Obra reconocida mundialmente");
-		Donacion d1 = new Donacion("D001", "2025-09-10", "Fundacion paradigmas", "50 pesos colombianos", "Economica");
-		Director dir1 = new Director("DIR001", true, true, "1M USD", "Sí", o1);
-		Catalogo cat1 = new Catalogo("CAT001");
-		cat1.agregarObra(o1);
+    public static void main(String[] args) {
 
-		// Mostrar objetos
-		System.out.println(a1);
-		System.out.println(au1);
-		System.out.println(o1);
-		System.out.println(e1);
-		System.out.println(ex1);
-		System.out.println(v1);
-		System.out.println(c1);
-		System.out.println(d1);
-		System.out.println(dir1);
-		System.out.println(cat1);
+        Scanner sc = new Scanner(System.in);
 
-		// Ejecuciones de métodos
-		au1.crearObra();
-		o1.exponerObra();
-		e1.organizarEvento();
-		ex1.inaugurar();
-		v1.registrarVisita();
-		c1.evaluar();
-		d1.registrarDonacion();
-		dir1.supervisar();
-		cat1.mostrarCatalogo();
+        ArrayList<Accesorio> accesorios = new ArrayList<>();
+        ArrayList<Autor> autores = new ArrayList<>();
+        ArrayList<Obra> obras = new ArrayList<>();
+        ArrayList<Evento> eventos = new ArrayList<>();
+        ArrayList<Exposicion> exposiciones = new ArrayList<>();
+        ArrayList<Visita> visitas = new ArrayList<>();
+        ArrayList<Donacion> donaciones = new ArrayList<>();
 
-		System.out.println("_____________________________________________________________________________________");
-		System.out.println("------ [ DETERMINANDO CADENA ] ------");
-		System.out.println(a1.determinarCadena(10.5));
+        int opcion = -1;
+        while (opcion != 0) {
+            System.out.println("\n=== MUSEO - MENÚ PRINCIPAL ===");
+            System.out.println("1. CRUD Accesorio");
+            System.out.println("2. CRUD Autor");
+            System.out.println("3. CRUD Obra");
+            System.out.println("4. CRUD Evento");
+            System.out.println("5. CRUD Exposicion");
+            System.out.println("6. CRUD Visita");
+            System.out.println("7. CRUD Donacion");
+            System.out.println("0. Salir");
+            System.out.print("Opcion: ");
+            opcion = sc.nextInt();
+            sc.nextLine();
 
-		System.out.println("_____________________________________________________________________________________");
-		System.out.println("---- [ POLIMORFISMO CON ACTIVIDAD[] ] ----");
+            switch (opcion) {
+                case 1 -> crudAccesorio(sc, accesorios);
+                case 2 -> crudAutor(sc, autores);
+                case 3 -> crudObra(sc, obras);
+                case 4 -> crudEvento(sc, eventos);
+                case 5 -> crudExposicion(sc, exposiciones);
+                case 6 -> crudVisita(sc, visitas);
+                case 7 -> crudDonacion(sc, donaciones);
+                case 0 -> System.out.println("Saliendo del sistema...");
+                default -> System.out.println("Opción no válida.");
+            }
+        }
 
-		Actividad poli = crearActividadEjemplo("exposicion");
-		procesarActividad(poli);
+        sc.close();
+    }
 
-		Actividad[] actividades = new Actividad[5];
-		actividades[0] = e1;
-		actividades[1] = ex1;
-		actividades[2] = v1;
+    // ---------------- ACCESORIO ----------------
+    private static void crudAccesorio(Scanner sc, ArrayList<Accesorio> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("\n--- CRUD ACCESORIO ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Actualizar");
+            System.out.println("4. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opcion: ");
+            op = sc.nextInt(); sc.nextLine();
 
-		for (Actividad actividad : actividades) {
-			System.out.println(actividad);
-		}
+            switch (op) {
+                case 1 -> {
+                    System.out.print("ID: ");
+                    String id = sc.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Material: ");
+                    String material = sc.nextLine();
+                    System.out.print("Fecha fabricación: ");
+                    String fecha = sc.nextLine();
+                    lista.add(new Accesorio(id, nombre, material, fecha));
+                    System.out.println(" Accesorio creado.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println("📭 No hay accesorios.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("ID a actualizar: ");
+                    String id = sc.nextLine();
+                    for (Accesorio a : lista) {
+                        if (a.getIdAccesorio().equals(id)) {
+                            System.out.print("Nuevo nombre: ");
+                            a.setNombre(sc.nextLine());
+                            System.out.print("Nuevo material: ");
+                            a.setMaterial(sc.nextLine());
+                            System.out.print("Nueva fecha: ");
+                            a.setFechaFabricacion(sc.nextLine());
+                            System.out.println(" Actualizado.");
+                            return;
+                        }
+                    }
+                    System.out.println(" No encontrado.");
+                }
+                case 4 -> {
+                    System.out.print("ID a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(a -> a.getIdAccesorio().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
 
-		System.out.println("_____________________________________________________________________________________");
-		System.out.println("---- [ CRUD GENÉRICO ] ----");
+    // ---------------- AUTOR ----------------
+    private static void crudAutor(Scanner sc, ArrayList<Autor> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("\n--- CRUD AUTOR ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Actualizar");
+            System.out.println("4. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opcion: ");
+            op = sc.nextInt(); sc.nextLine();
 
-		// CRUD para Accesorios
-		ImplementacionOperacionCRUD<Accesorio> crudAccesorio = new ImplementacionOperacionCRUD<>();
-		crudAccesorio.create(a1);
-		Accesorio a2 = new Accesorio("ACC002", "Lámpara");
-		crudAccesorio.create(a2);
+            switch (op) {
+                case 1 -> {
+                    System.out.print("ID Autor: ");
+                    String id = sc.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Nacionalidad: ");
+                    String nac = sc.nextLine();
+                    lista.add(new Autor(id, nombre, nac));
+                    System.out.println(" Autor creado.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println("📭 No hay autores.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("ID a actualizar: ");
+                    String id = sc.nextLine();
+                    for (Autor a : lista) {
+                        if (a.getIdAutor().equals(id)) {
+                            System.out.print("Nuevo nombre: ");
+                            a.setNombre(sc.nextLine());
+                            System.out.print("Nueva nacionalidad: ");
+                            a.setNacionalidad(sc.nextLine());
+                            System.out.println(" Actualizado.");
+                            return;
+                        }
+                    }
+                    System.out.println(" No encontrado.");
+                }
+                case 4 -> {
+                    System.out.print("ID a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(a -> a.getIdAutor().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
 
-		System.out.println("Lista de Accesorios:");
-		for (Accesorio a : crudAccesorio.list()) {
-			System.out.println(a);
-		}
+    // ---------------- OBRA ----------------
+    private static void crudObra(Scanner sc, ArrayList<Obra> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("\n--- CRUD OBRA ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Actualizar");
+            System.out.println("4. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opcion: ");
+            op = sc.nextInt(); sc.nextLine();
 
-		// Leer objeto
-		System.out.println("Leer ACC001: " + crudAccesorio.read("ACC001"));
+            switch (op) {
+                case 1 -> {
+                    System.out.print("ID: ");
+                    String id = sc.nextLine();
+                    System.out.print("Título: ");
+                    String titulo = sc.nextLine();
+                    System.out.print("Técnica: ");
+                    String tecnica = sc.nextLine();
+                    System.out.print("Fecha de creación: ");
+                    String fecha = sc.nextLine();
+                    lista.add(new Obra(id, titulo, tecnica, fecha));
+                    System.out.println(" Obra creada.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println("📭 No hay obras.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("ID a actualizar: ");
+                    String id = sc.nextLine();
+                    for (Obra o : lista) {
+                        if (o.getIdObra().equals(id)) {
+                            System.out.print("Nuevo título: ");
+                            o.setTitulo(sc.nextLine());
+                            System.out.print("Nueva técnica: ");
+                            o.setTecnica(sc.nextLine());
+                            System.out.print("Nueva fecha: ");
+                            o.setFechaCreacion(sc.nextLine());
+                            System.out.println(" Actualizado.");
+                            return;
+                        }
+                    }
+                    System.out.println(" No encontrado.");
+                }
+                case 4 -> {
+                    System.out.print("ID a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(o -> o.getIdObra().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
 
-		// Actualizar objeto
-		Accesorio aActualizado = new Accesorio("ACC001", "Marco Dorado", "Madera", "2023-01-01");
-		crudAccesorio.update("ACC001", aActualizado);
-		System.out.println("Después de actualizar ACC001:");
-		for (Accesorio a : crudAccesorio.list()) {
-			System.out.println(a);
-		}
+    // ---------------- EVENTO ----------------
+    private static void crudEvento(Scanner sc, ArrayList<Evento> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("--- CRUD EVENTO ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opcion: ");
+            op = sc.nextInt(); sc.nextLine();
 
-		// Eliminar objeto
-		crudAccesorio.delete("ACC002");
-		System.out.println("Después de eliminar ACC002:");
-		for (Accesorio a : crudAccesorio.list()) {
-			System.out.println(a);
-		}
+            switch (op) {
+                case 1 -> {
+                    System.out.print("Serial: ");
+                    String serial = sc.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Inicio: ");
+                    String ini = sc.nextLine();
+                    System.out.print("Fin: ");
+                    String fin = sc.nextLine();
+                    System.out.print("Tipo: ");
+                    String tipo = sc.nextLine();
+                    lista.add(new Evento(serial, nombre, ini, fin, tipo));
+                    System.out.println(" Evento creado.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println(" No hay eventos.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("Serial a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(e -> e.getSerial().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
 
-		System.out.println("_____________________________________________________________________________________");
-	}
+    // ---------------- EXPOSICION ----------------
+    private static void crudExposicion(Scanner sc, ArrayList<Exposicion> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("\n--- CRUD EXPOSICIÓN ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+            op = sc.nextInt(); sc.nextLine();
 
-	// Método para procesar polimorfismo
-	public static final void procesarActividad(Actividad actividad) {
-		System.out.println("Procesando actividad...");
-		System.out.println(actividad);
+            switch (op) {
+                case 1 -> {
+                    System.out.print("Serial: ");
+                    String serial = sc.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Inicio: ");
+                    String ini = sc.nextLine();
+                    System.out.print("Fin: ");
+                    String fin = sc.nextLine();
+                    System.out.print("Descripción: ");
+                    String des = sc.nextLine();
+                    System.out.print("Tema: ");
+                    String tema = sc.nextLine();
+                    lista.add(new Exposicion(serial, nombre, ini, fin, des, tema));
+                    System.out.println(" Exposición creada.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println(" No hay exposiciones.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("Serial a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(e -> e.getSerial().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
 
-		if (actividad instanceof Evento) {
-			((Evento) actividad).organizarEvento();
-		} else if (actividad instanceof Exposicion) {
-			((Exposicion) actividad).inaugurar();
-		} else if (actividad instanceof Visita) {
-			((Visita) actividad).registrarVisita();
-		}
-	}
+    // ---------------- VISITA ----------------
+    private static void crudVisita(Scanner sc, ArrayList<Visita> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("\n--- CRUD VISITA ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+            op = sc.nextInt(); sc.nextLine();
 
-	// Método para crear actividad polimórfica
-	public static Actividad crearActividadEjemplo(String tipo) {
-		switch (tipo.toLowerCase()) {
-		case "evento":
-			return new Evento("EV999", "Evento Polimórfico", "2025-10-01", "2025-10-02", "Tecnología");
-		case "exposicion":
-			return new Exposicion("EX999", "Expo Polimórfica", "2025-10-05", "2025-10-10", "Descripción",
-					"Arte Digital");
-		case "visita":
-			return new Visita("V999", "Visita Polimórfica", "2025-10-11", "2025-10-11", "Femenino", "2025-10-11");
-		default:
-			return new Actividad("ACT999", "Actividad Base", "2025-01-01", "2025-01-02") {
-			};
-		}
-	}
+            switch (op) {
+                case 1 -> {
+                    System.out.print("Serial: ");
+                    String serial = sc.nextLine();
+                    System.out.print("Nombre: ");
+                    String nombre = sc.nextLine();
+                    System.out.print("Inicio: ");
+                    String ini = sc.nextLine();
+                    System.out.print("Fin: ");
+                    String fin = sc.nextLine();
+                    System.out.print("Género: ");
+                    String gen = sc.nextLine();
+                    System.out.print("Fecha visita: ");
+                    String fecha = sc.nextLine();
+                    lista.add(new Visita(serial, nombre, ini, fin, gen, fecha));
+                    System.out.println(" Visita creada.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println("📭 No hay visitas.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("Serial a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(v -> v.getSerial().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
+
+    // ---------------- DONACION ----------------
+    private static void crudDonacion(Scanner sc, ArrayList<Donacion> lista) {
+        int op = -1;
+        while (op != 0) {
+            System.out.println("\n--- CRUD DONACIÓN ---");
+            System.out.println("1. Crear");
+            System.out.println("2. Listar");
+            System.out.println("3. Eliminar");
+            System.out.println("0. Volver");
+            System.out.print("Opción: ");
+            op = sc.nextInt(); sc.nextLine();
+
+            switch (op) {
+                case 1 -> {
+                    System.out.print("Serial: ");
+                    String serial = sc.nextLine();
+                    System.out.print("Fecha: ");
+                    String fecha = sc.nextLine();
+                    System.out.print("Donador: ");
+                    String donador = sc.nextLine();
+                    System.out.print("Cantidad: ");
+                    String cantidad = sc.nextLine();
+                    System.out.print("Tipo donación: ");
+                    String tipo = sc.nextLine();
+                    lista.add(new Donacion(serial, fecha, donador, cantidad, tipo));
+                    System.out.println(" Donación creada.");
+                }
+                case 2 -> {
+                    if (lista.isEmpty()) System.out.println("📭 No hay donaciones.");
+                    else lista.forEach(System.out::println);
+                }
+                case 3 -> {
+                    System.out.print("Serial a eliminar: ");
+                    String id = sc.nextLine();
+                    lista.removeIf(d -> d.getSerial().equals(id));
+                    System.out.println(" Eliminado si existía.");
+                }
+            }
+        }
+    }
 }
+
