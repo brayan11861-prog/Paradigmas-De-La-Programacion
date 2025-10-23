@@ -1,11 +1,16 @@
-package co.edu.poli.actividad3.servicios;
+package co.edu.poli.actividad3.visita;
 
 import co.edu.poli.actividad3.modelo.Actividad;
 
 public interface OperacionCRUD {
+
     boolean create(Actividad a);
-    Actividad read(int id);
-    boolean update(int id, Actividad nueva);
-    boolean delete(int id);
+
+    Actividad read(String serial);
+
+    boolean update(String serial, Actividad nueva);
+
+    boolean delete(String serial);
+
     void listar();
 }
